@@ -1,6 +1,19 @@
 import { useEffect, useState } from 'react'
 import { HashRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import logoImage from './assets/AFA_logo.png'
+import presidentHeadshot from './assets/president.jpg'
+import coPresidentHeadshot from './assets/co_president.jpg'
+import vicePresidentHeadshot from './assets/vice_president.jpg'
+import secretaryHeadshot from './assets/secretary.jpg'
+import outreachDirectorHeadshot from './assets/outreach_director.jpg'
+import webCommsDirectorHeadshot from './assets/web_comms_director.jpg'
+import socialMediaDirectorHeadshot from './assets/social_media_director.jpg'
+import recruitmentOfficerHeadshot from './assets/recruitment_officer.jpg'
+import eventsOfficerHeadshot from './assets/events_officer.jpg'
+import inclusionOfficerHeadshot from './assets/inclusion_officer.jpg'
+import committeeLeaderHeadshot from './assets/committee_leader.jpg'
+import committeeLeader2Headshot from './assets/committee_leader2.jpg'
+import committeeLeader3Headshot from './assets/committee_leader3.jpg'
 import './App.css'
 
 const club = {
@@ -109,31 +122,23 @@ const values = [
 ]
 
 const leadership = [
-  ['Gauri Mishra', 'Founder, Co-president'],
-  ['Mehak Gaba', 'Founder, Co-president'],
-  ['Saachi Upadhyaya', 'Vice President'],
-  ['Areebah Mubin', 'Secretary'],
-  ['Anisha Bhattaru', 'Treasurer'],
-  ['Katie Hoang', 'Communications and Media Director'],
-  ['Sarah Poliuc', 'Social Media Director'],
-  ['Stephanie Cao', 'Recruitment Director'],
-  ['Vanisha Dadhich', 'Events Director'],
-].map(([name, role], index) => ({
+  ['President', 'Executive Board', presidentHeadshot],
+  ['Co-president', 'Executive Board', coPresidentHeadshot],
+  ['Vice President', 'Executive Board', vicePresidentHeadshot],
+  ['Secretary', 'Executive Board', secretaryHeadshot],
+  ['Outreach Director', 'Executive Board', outreachDirectorHeadshot],
+  ['Web and Communications Director', 'Executive Board', webCommsDirectorHeadshot],
+  ['Social Media Director', 'Executive Board', socialMediaDirectorHeadshot],
+  ['Recruitment Officer', 'Executive Board', recruitmentOfficerHeadshot],
+  ['Events Officer', 'Executive Board', eventsOfficerHeadshot],
+  ['Inclusion Officer', 'Executive Board', inclusionOfficerHeadshot],
+  ['Committee Leader', 'Leadership Team', committeeLeaderHeadshot],
+  ['Committee Leader', 'Leadership Team', committeeLeader2Headshot],
+  ['Committee Leader', 'Leadership Team', committeeLeader3Headshot],
+].map(([name, role, image]) => ({
   name,
   role,
-  image: `https://images.unsplash.com/photo-${
-    [
-      '1494790108377-be9c29b29330',
-      '1487412720507-e7ab37603c6f',
-      '1500648767791-00dcc994a43e',
-      '1506794778202-cad84cf45f1d',
-      '1544005313-94ddf0286df2',
-      '1544717305-2782549b5136',
-      '1545239351-1141bd82e8a6',
-      '1546961329-78bef0414d7c',
-      '1542204625-de293a2f43d0',
-    ][index]
-  }?auto=format&fit=crop&w=800&q=80`,
+  image,
 }))
 
 const subcommittees = [
@@ -453,7 +458,7 @@ function AboutPage() {
 
       <Section
         title="Leadership team"
-        intro="Nine student leaders coordinate outreach, events, membership care, and club operations."
+        intro="Thirteen student leaders coordinate outreach, events, membership care, and club operations."
       >
         <Carousel items={leadership} renderItem={(person) => <LeaderCard person={person} />} />
       </Section>
