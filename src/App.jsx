@@ -6,7 +6,7 @@ import './App.css'
 const club = {
   name: 'University of Texas Arts for Aid',
   shortName: 'UTAFA',
-  email: 'hello@utafa.org',
+  email: 'texasartsforaid@gmail.com',
   about:
     'Texas Arts for Aid (AFA) is a student organization that engages UT students of all skill levels in creative service projects that benefit a broader community.',
   mission:
@@ -628,7 +628,7 @@ function ContactPage() {
             </p>
             <h3>Socials</h3>
             <p>@texasafa on Instagram</p>
-            <p>LinkedIn: University of Texas Arts for Aid</p>
+            <p>LinkedIn: Texas Arts for Aid</p>
             <h3>Meeting info</h3>
             <p>General meetings every other Tuesday at 7:00 PM in the Student Activity Center.</p>
           </div>
@@ -871,7 +871,7 @@ function Footer() {
             <a href={`mailto:${club.email}`}>{club.email}</a>
           </p>
           <p>Instagram: @texasafa</p>
-          <p>LinkedIn: University of Texas Arts for Aid</p>
+          <p>LinkedIn: Texas Arts for Aid</p>
         </div>
       </div>
     </footer>
