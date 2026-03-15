@@ -444,6 +444,14 @@
   height: 16rem;
 }
 
+.leader-card {
+  min-height: 27rem;
+}
+
+.leader-card img {
+  height: 30rem;
+}
+
 .carousel-copy {
   padding: 1.25rem;
 }
