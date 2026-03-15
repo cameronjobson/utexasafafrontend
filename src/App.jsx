@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ReactSlick from 'react-slick'
 import { HashRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import logoImage from './assets/AFA_logo.png'
 import presidentHeadshot from './assets/president.jpg'
@@ -14,7 +15,11 @@ import inclusionOfficerHeadshot from './assets/inclusion_officer.jpg'
 import committeeLeaderHeadshot from './assets/committee_leader.jpg'
 import committeeLeader2Headshot from './assets/committee_leader2.jpg'
 import committeeLeader3Headshot from './assets/committee_leader3.jpg'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
+
+const Slider = ReactSlick.default ?? ReactSlick
 
 const club = {
   name: 'University of Texas Arts for Aid',
@@ -845,38 +850,64 @@ function ActionCard({ title, text, href, cta }) {
 }
 
 function Carousel({ items, renderItem }) {
-  const [index, setIndex] = useState(0)
-  const visibleItems = items.slice(index, index + 3)
+  const [isSliderReady, setIsSliderReady] = useState(false)
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window === 'undefined' ? 1200 : window.innerWidth
+  )
 
-  const next = () => {
-    setIndex((current) => (current + 1 > items.length - 3 ? 0 : current + 1))
+  useEffect(() => {
+    setIsSliderReady(true)
+  }, [])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const slidesToShow = viewportWidth <= 640 ? 1 : viewportWidth <= 960 ? Math.min(2, items.length) : Math.min(3, items.length)
+
+  const settings = {
+    dots: true,
+    infinite: items.length > slidesToShow,
+    speed: 500,
+    slidesToShow,
+    slidesToScroll: 1,
+    arrows: true,
+    swipe: true,
+    draggable: true,
+    touchMove: true,
   }
 
-  const previous = () => {
-    setIndex((current) => (current === 0 ? Math.max(items.length - 3, 0) : current - 1))
+  if (!isSliderReady) {
+    return (
+      <div className="carousel">
+        <div className="carousel-loading">
+          {items.slice(0, 3).map((item) => (
+            <div key={item.name || item.title} className="carousel-slide">
+              {renderItem(item)}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="carousel">
-      <div className="carousel-track">
-        {visibleItems.map((item) => renderItem(item))}
-      </div>
-      <div className="carousel-controls">
-        <button type="button" onClick={previous} aria-label="Previous cards">
-          Prev
-        </button>
-        <div className="carousel-dots" aria-hidden="true">
-          {items.map((item, dotIndex) => (
-            <span
-              key={item.name || item.title}
-              className={dotIndex >= index && dotIndex < index + 3 ? 'active' : ''}
-            />
-          ))}
-        </div>
-        <button type="button" onClick={next} aria-label="Next cards">
-          Next
-        </button>
-      </div>
+      <Slider {...settings}>
+        {items.map((item) => (
+          <div key={item.name || item.title} className="carousel-slide">
+            {renderItem(item)}
+          </div>
+        ))}
+      </Slider>
     </div>
   )
 }
