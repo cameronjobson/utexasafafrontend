@@ -19,6 +19,7 @@
 }
 
 .navbar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,26 +70,26 @@
 }
 
 .flip-link {
-  position: relative;
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 7rem;
   padding: 0;
   border-radius: 999px;
   text-decoration: none;
-  perspective: 1000px;
 }
 
 .flip-link span {
-  grid-area: 1 / 1;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   min-width: 100%;
   padding: 0.8rem 1.05rem;
   border-radius: 999px;
-  transition: transform 0.45s ease, opacity 0.45s ease, background 0.3s ease;
-  backface-visibility: hidden;
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease;
   font-size: 0.95rem;
 }
 
@@ -99,33 +100,26 @@
 }
 
 .flip-link span:last-child {
-  opacity: 0;
-  transform: rotateX(-90deg);
-  transform-origin: center top;
-  background: linear-gradient(135deg, var(--plum-400), var(--rose-400));
-  color: white;
+  display: none;
 }
 
 .flip-link:hover span:first-child,
 .flip-link:focus-visible span:first-child,
 .flip-link.is-active span:first-child {
-  opacity: 0;
-  transform: rotateX(90deg);
-}
-
-.flip-link:hover span:last-child,
-.flip-link:focus-visible span:last-child,
-.flip-link.is-active span:last-child {
-  opacity: 1;
-  transform: rotateX(0deg);
+  background: linear-gradient(135deg, var(--plum-400), var(--rose-400));
+  color: white;
+  border-color: transparent;
 }
 
 .menu-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 0.3rem;
   width: 3rem;
   height: 3rem;
+  padding: 0;
   border: 0;
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.55);
@@ -685,9 +679,13 @@
 
   .nav-links {
     position: absolute;
-    inset: calc(100% + 0.75rem) 1rem auto 1rem;
+    top: calc(100% + 0.75rem);
+    right: 0;
     display: none;
-    padding: 1rem;
+    justify-items: stretch;
+    gap: 0.75rem;
+    width: min(13.5rem, calc(100vw - 1rem));
+    padding: 0.85rem;
     border-radius: 1.5rem;
     background: rgba(255, 248, 250, 0.96);
     box-shadow: 0 25px 55px rgba(81, 23, 87, 0.12);
