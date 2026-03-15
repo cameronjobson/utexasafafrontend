@@ -13,6 +13,7 @@ const club = {
     'Our mission is to unite students and the Austin community in meaningful creative projects that bring joy, foster connection, and support underprivileged communities. By partnering with local small businesses and service organizations, we aim to inspire social change, promote mutual aid, and build a vibrant, inclusive community where creativity and service go hand in hand.',
   joinLink: '#/join',
   donationLink: '#/support',
+  groupMeLink: 'https://groupme.com/join_group/110796281/itI6OiPd',
   calendarEmbed:
     'https://calendar.google.com/calendar/embed?src=e8bbaf600392584de633908feb44d0a7b7906f0c418f6259a1bf9c925e21fc6a%40group.calendar.google.com&ctz=America%2FChicago',
 }
@@ -599,6 +600,12 @@ function JoinPage() {
             cta="Collaborate"
           />
           <ActionCard
+            title="Join the GroupMe"
+            text="Get quick reminders, event updates, and club communication in the main member chat."
+            href={club.groupMeLink}
+            cta="Open GroupMe"
+          />
+          <ActionCard
             title="Donations"
             text="Support transportation, supplies, and club-led service initiatives."
             href={club.donationLink}
@@ -627,8 +634,29 @@ function ContactPage() {
               <a href={`mailto:${club.email}`}>{club.email}</a>
             </p>
             <h3>Socials</h3>
-            <p>@texasafa on Instagram</p>
-            <p>LinkedIn: Texas Arts for Aid</p>
+            <p>
+              <a
+                href="https://www.instagram.com/texasafa/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @texasafa on Instagram
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://www.linkedin.com/company/texas-arts-for-aid/posts/?feedView=all"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn: Texas Arts for Aid
+              </a>
+            </p>
+            <p>
+              <a href={club.groupMeLink} target="_blank" rel="noreferrer">
+                Join the club GroupMe
+              </a>
+            </p>
             <h3>Meeting info</h3>
             <p>General meetings every other Tuesday at 7:00 PM in the Student Activity Center.</p>
           </div>
@@ -870,8 +898,29 @@ function Footer() {
           <p>
             <a href={`mailto:${club.email}`}>{club.email}</a>
           </p>
-          <p>Instagram: @texasafa</p>
-          <p>LinkedIn: Texas Arts for Aid</p>
+          <p>
+            <a
+              href="https://www.instagram.com/texasafa/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram: @texasafa
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://www.linkedin.com/company/texas-arts-for-aid/posts/?feedView=all"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn: Texas Arts for Aid
+            </a>
+          </p>
+          <p>
+            <a href={club.groupMeLink} target="_blank" rel="noreferrer">
+              Join our GroupMe
+            </a>
+          </p>
         </div>
       </div>
     </footer>
