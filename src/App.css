@@ -218,6 +218,21 @@
   padding: 2rem;
 }
 
+.hero-logo-art {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.hero-logo {
+  width: min(100%, 36rem);
+  height: auto;
+  display: block;
+  transform: scale(1.18);
+  transform-origin: center;
+  filter: drop-shadow(0 35px 70px rgba(212, 140, 157, 0.22));
+}
+
 .hero-badge {
   position: absolute;
   top: 0.5rem;

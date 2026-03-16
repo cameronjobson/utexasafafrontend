@@ -404,22 +404,12 @@ function Hero() {
           </NavLink>
         </div>
       </div>
-      <div className="hero-art reveal reveal-delayed" aria-hidden="true">
-        <div className="hero-badge">Since 2015</div>
-        <div className="hero-panel">
-          <div className="mini-card">
-            <span>Volunteer hours</span>
-            <strong>2.4k+</strong>
-          </div>
-          <div className="mini-card accent">
-            <span>Community partners</span>
-            <strong>18</strong>
-          </div>
-          <div className="mini-card">
-            <span>Average event size</span>
-            <strong>42 students</strong>
-          </div>
-        </div>
+      <div className="hero-art hero-logo-art reveal reveal-delayed">
+        <img
+          className="hero-logo"
+          src={logoImage}
+          alt="University of Texas Arts for Aid logo"
+        />
       </div>
     </section>
   )
