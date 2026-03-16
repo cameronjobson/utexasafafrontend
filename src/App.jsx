@@ -15,6 +15,12 @@ import inclusionOfficerHeadshot from './assets/inclusion_officer.jpg'
 import committeeLeaderHeadshot from './assets/committee_leader.jpg'
 import committeeLeader2Headshot from './assets/committee_leader2.jpg'
 import committeeLeader3Headshot from './assets/committee_leader3.jpg'
+import braceletsImage from './assets/bracelets.jpg'
+import halloweenEventImage from './assets/halloween_event.jpg'
+import valentinesEventImage from './assets/valentines_day_event.jpg'
+import groupPhotoMain from './assets/group_photo_main.jpg'
+import braceletsMainImage from './assets/bracelets_main.jpg'
+import valentinesMainImage from './assets/Valentines_main.jpg'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -97,17 +103,15 @@ const photoHighlights = [
   {
     title: 'Welcome socials that feel easy to join',
     image:
-      'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80',
+      groupPhotoMain,
   },
   {
     title: 'Hands-on service all semester long',
-    image:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
+    image: braceletsMainImage,
   },
   {
     title: 'Small teams, real neighborhood impact',
-    image:
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80',
+    image: valentinesMainImage,
   },
 ]
 
@@ -181,20 +185,17 @@ const pastProjects = [
   {
     title: 'Back-to-School Supply Drive',
     text: 'Members collected 1,100 school supplies and packed backpacks for elementary students across Austin ISD partner campuses.',
-    image:
-      'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80',
+    image: valentinesEventImage,
   },
   {
-    title: 'Winter Warmth Week',
-    text: 'A weeklong donation campaign and volunteer series that supported local shelters with coats, blankets, and hot meal service.',
-    image:
-      'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80',
+    title: 'Bracelets for Aid',
+    text: 'Text about the bracelet-making event where members crafted x bracelets to sell at a x, raising $x for x.',
+    image: braceletsImage,
   },
   {
-    title: 'Neighborhood Beautification Day',
+    title: 'Halloween school event',
     text: 'Teams painted fences, cleaned shared spaces, and planted flowers alongside residents and community leaders.',
-    image:
-      'https://images.unsplash.com/photo-1469571486292-b53601020f35?auto=format&fit=crop&w=900&q=80',
+    image: halloweenEventImage,
   },
 ]
 
