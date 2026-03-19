@@ -152,32 +152,116 @@ const leadership = [
 
 const subcommittees = [
   {
-    name: 'Community Outreach',
-    image:
-      'https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=80',
+    name: 'Dragonflies',
+    logo: logoImage,
     description:
-      'Build relationships with local nonprofits and help match members to meaningful service opportunities.',
+      'Build relationships with Austin nonprofits and help members plug into service opportunities that are consistent, local, and easy to join. This team helps turn club interest into real community partnerships.',
+    gallery: [
+      {
+        image: groupPhotoMain,
+        alt: 'Members gathering together at a community event',
+      },
+      {
+        image: valentinesMainImage,
+        alt: 'A volunteer project with handmade crafts prepared for the community',
+      },
+    ],
+    leaders: [
+      {
+        name: 'Michelle Wainaina',
+        title: 'Outreach Director',
+        image: outreachDirectorHeadshot,
+      },
+      {
+        name: 'Lindsey Levan',
+        title: 'Committee Leader',
+        image: committeeLeaderHeadshot,
+      },
+    ],
   },
   {
-    name: 'Events and Hospitality',
-    image:
-      'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80',
+    name: 'Ladybugs',
+    logo: logoImage,
     description:
-      'Shape the warm, polished experience behind socials, volunteer days, and community appreciation events.',
+      'Plan the flow, setup, and member experience behind socials, service days, and appreciation events. This subcommittee focuses on making every event feel warm, organized, and welcoming from the moment people arrive.',
+    gallery: [
+      {
+        image: valentinesEventImage,
+        alt: 'Members at a themed club event',
+      },
+      {
+        image: halloweenEventImage,
+        alt: 'A festive volunteer event with club members participating together',
+      },
+    ],
+    leaders: [
+      {
+        name: 'Vani Agarwal',
+        title: 'Events Officer',
+        image: eventsOfficerHeadshot,
+      },
+      {
+        name: 'Radhwa Habib',
+        title: 'Committee Leader',
+        image: committeeLeader2Headshot,
+      },
+    ],
   },
   {
-    name: 'Fundraising and Impact',
-    image:
-      'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=900&q=80',
+    name: 'Bumblebees',
+    logo: logoImage,
     description:
-      'Coordinate donation drives, sponsor outreach, and storytelling around the club’s service outcomes.',
+      'Coordinate donation drives, sponsorship ideas, and impact storytelling that helps projects grow. Members on this team connect the creative side of the club with the resources needed to sustain it.',
+    gallery: [
+      {
+        image: braceletsImage,
+        alt: 'Bracelets arranged during a fundraising craft project',
+      },
+      {
+        image: braceletsMainImage,
+        alt: 'Members making crafts for a fundraising initiative',
+      },
+    ],
+    leaders: [
+      {
+        name: 'Sarah Poliuc',
+        title: 'Social Media Director',
+        image: socialMediaDirectorHeadshot,
+      },
+      {
+        name: 'Mallory Craft',
+        title: 'Committee Leader',
+        image: committeeLeader3Headshot,
+      },
+    ],
   },
   {
-    name: 'Marketing and Design',
-    image:
-      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80',
+    name: 'Fireflies',
+    logo: logoImage,
     description:
-      'Create flyers, social campaigns, and beautiful content that make the club approachable and easy to discover.',
+      'Create flyers, social posts, and visual campaigns that make Texas Arts for Aid easy to discover and easy to understand. This team shapes the club’s public voice across campus and online.',
+    gallery: [
+      {
+        image: groupPhotoMain,
+        alt: 'A large group photo from a Texas Arts for Aid event',
+      },
+      {
+        image: braceletsMainImage,
+        alt: 'A styled photo highlighting a creative service project',
+      },
+    ],
+    leaders: [
+      {
+        name: 'Sophia Nguyen',
+        title: 'Web and Communications Director',
+        image: webCommsDirectorHeadshot,
+      },
+      {
+        name: 'Breña Hernandez',
+        title: 'Recruitment Officer',
+        image: recruitmentOfficerHeadshot,
+      },
+    ],
   },
 ]
 
@@ -578,10 +662,7 @@ function JoinPage() {
       </Section>
 
       <Section title="Subcommittees">
-        <Carousel
-          items={subcommittees}
-          renderItem={(committee) => <SubcommitteeCard committee={committee} />}
-        />
+        <SubcommitteeTabs committees={subcommittees} />
       </Section>
 
       <Section title="FAQ">
@@ -831,15 +912,73 @@ function LeaderCard({ person }) {
   )
 }
 
-function SubcommitteeCard({ committee }) {
+function SubcommitteeTabs({ committees }) {
+  const [activeCommittee, setActiveCommittee] = useState(committees[0]?.name ?? '')
+  const committee =
+    committees.find((entry) => entry.name === activeCommittee) ?? committees[0]
+
+  if (!committee) {
+    return null
+  }
+
   return (
-    <article className="carousel-card subcommittee-card scroll-reveal is-visible">
-      <img src={committee.image} alt={committee.name} />
-      <div className="carousel-copy">
-        <h3>{committee.name}</h3>
-        <p>{committee.description}</p>
+    <div className="subcommittee-tabs">
+      <div className="subcommittee-tab-list" role="tablist" aria-label="Subcommittees">
+        {committees.map((entry) => {
+          const isActive = entry.name === committee.name
+
+          return (
+            <button
+              key={entry.name}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`subcommittee-tab ${isActive ? 'is-active' : ''}`}
+              onClick={() => setActiveCommittee(entry.name)}
+            >
+              {entry.name}
+            </button>
+          )
+        })}
       </div>
-    </article>
+
+      <Reveal as="article" className="subcommittee-panel" key={committee.name}>
+        <div className="subcommittee-top-row">
+          <div className="subcommittee-logo-frame">
+            <img src={committee.logo} alt={`${committee.name} logo`} className="subcommittee-logo" />
+          </div>
+          <div className="subcommittee-summary">
+            <h3>{committee.name}</h3>
+            <p>{committee.description}</p>
+          </div>
+        </div>
+
+        <div className="subcommittee-gallery">
+          {committee.gallery.map((photo) => (
+            <div className="subcommittee-gallery-card" key={photo.alt}>
+              <img src={photo.image} alt={photo.alt} />
+            </div>
+          ))}
+        </div>
+
+        <div className="subcommittee-leaders">
+          <div className="subcommittee-leaders-header">
+            <h4>Leaders</h4>
+          </div>
+          <div className="subcommittee-leader-grid">
+            {committee.leaders.map((leader) => (
+              <article className="subcommittee-leader-card" key={`${committee.name}-${leader.name}`}>
+                <img src={leader.image} alt={leader.name} />
+                <div>
+                  <h5>{leader.name}</h5>
+                  <p>{leader.title}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+    </div>
   )
 }
 
