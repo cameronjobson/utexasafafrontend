@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ReactSlick from 'react-slick'
 import { HashRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import logoImage from './assets/AFA_logo.png'
@@ -333,8 +333,8 @@ function HomePage({ calendarState }) {
         intro="We pair meaningful community work with a social culture that makes showing up feel natural. Members get structure, support, and friends who care about making Austin better."
       >
         <div className="three-up-grid">
-          {values.map((value) => (
-            <InfoCard key={value.title} {...value} />
+          {values.map((value, index) => (
+            <InfoCard key={value.title} {...value} delay={String(index % 3)} />
           ))}
         </div>
       </Section>
@@ -346,8 +346,8 @@ function HomePage({ calendarState }) {
       >
         <EventsStatusNotice calendarState={calendarState} compact />
         <div className="event-grid">
-          {featuredEvents.map((event) => (
-            <EventCard key={event.title} event={event} />
+          {featuredEvents.map((event, index) => (
+            <EventCard key={event.title} event={event} delay={String(index % 3)} />
           ))}
         </div>
       </Section>
@@ -357,11 +357,11 @@ function HomePage({ calendarState }) {
         title="Small actions, visible results"
       >
         <div className="stats-grid">
-          {stats.map((stat) => (
-            <article className="stat-card" key={stat.label}>
+          {stats.map((stat, index) => (
+            <Reveal as="article" className="stat-card" key={stat.label} delay={String(index % 4)}>
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -372,15 +372,17 @@ function HomePage({ calendarState }) {
       >
         <div className="photo-grid">
           {photoHighlights.map((photo, index) => (
-            <article
+            <Reveal
+              as="article"
               className={`photo-card photo-card-${index + 1}`}
               key={photo.title}
+              delay={String(index % 3)}
             >
               <img src={photo.image} alt={photo.title} />
               <div className="photo-card-copy">
                 <h3>{photo.title}</h3>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -391,7 +393,7 @@ function HomePage({ calendarState }) {
 function Hero() {
   return (
     <section className="hero-section container">
-      <div className="hero-copy reveal">
+      <Reveal className="hero-copy" delay="0">
         <p className="eyebrow">Community-centered volunteering at UT Austin</p>
         <h1>{club.name}</h1>
         <p className="hero-text">{club.about}</p>
@@ -403,14 +405,14 @@ function Hero() {
             See Upcoming Events
           </NavLink>
         </div>
-      </div>
-      <div className="hero-art hero-logo-art reveal reveal-delayed">
+      </Reveal>
+      <Reveal className="hero-art hero-logo-art" delay="1">
         <img
           className="hero-logo"
           src={logoImage}
           alt="University of Texas Arts for Aid logo"
         />
-      </div>
+      </Reveal>
     </section>
   )
 }
@@ -436,18 +438,20 @@ function AboutPage() {
           <InfoCard
             title="What is AFA?"
             text={club.about}
+            delay="0"
           />
           <InfoCard
             title="Our mission"
             text={club.mission}
+            delay="1"
           />
         </div>
       </Section>
 
       <Section title="Our values">
         <div className="three-up-grid">
-          {values.map((value) => (
-            <InfoCard key={value.title} {...value} />
+          {values.map((value, index) => (
+            <InfoCard key={value.title} {...value} delay={String(index % 3)} />
           ))}
         </div>
       </Section>
@@ -464,14 +468,17 @@ function AboutPage() {
           <InfoCard
             title="Open to all majors"
             text="Our members come from education, business, nursing, engineering, liberal arts, and beyond."
+            delay="0"
           />
           <InfoCard
             title="Built for busy students"
             text="Service opportunities vary in time commitment so students can stay involved through different seasons of the semester."
+            delay="1"
           />
           <InfoCard
             title="Benefits of membership"
             text="Members gain leadership experience, close friendships, service hours, project management skills, and a strong campus community."
+            delay="2"
           />
         </div>
       </Section>
@@ -491,8 +498,8 @@ function EventsPage({ calendarState }) {
       <Section title="Upcoming events" intro="Each event card reads from Google Calendar event details including date, time, location, and the event link when available.">
         <EventsStatusNotice calendarState={calendarState} />
         <div className="event-list">
-          {calendarState.events.map((event) => (
-            <EventListItem key={event.title} event={event} />
+          {calendarState.events.map((event, index) => (
+            <EventListItem key={event.title} event={event} delay={String(index % 3)} />
           ))}
         </div>
       </Section>
@@ -510,9 +517,11 @@ function EventsPage({ calendarState }) {
       <Section title="Past projects and highlights">
         <div className="project-stack">
           {pastProjects.map((project, index) => (
-            <article
+            <Reveal
+              as="article"
               className={`project-row ${index % 2 === 1 ? 'reverse' : ''}`}
               key={project.title}
+              delay={String(index % 2)}
             >
               <img src={project.image} alt={project.title} />
               <div className="project-copy">
@@ -520,7 +529,7 @@ function EventsPage({ calendarState }) {
                 <h3>{project.title}</h3>
                 <p>{project.text}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -540,15 +549,15 @@ function JoinPage() {
       <Section title="Why join">
         <div className="three-up-grid">
           <InfoCard title="Find your people" text="Meet thoughtful, service-minded students in a club culture that is social, kind, and easy to enter." />
-          <InfoCard title="Build leadership" text="Gain experience planning projects, coordinating teams, and communicating with campus and community partners." />
-          <InfoCard title="Create local impact" text="Support Austin organizations through regular projects instead of one-off appearances only." />
+          <InfoCard title="Build leadership" text="Gain experience planning projects, coordinating teams, and communicating with campus and community partners." delay="1" />
+          <InfoCard title="Create local impact" text="Support Austin organizations through regular projects instead of one-off appearances only." delay="2" />
         </div>
       </Section>
 
       <Section title="Membership details">
         <div className="split-grid">
-          <InfoCard title="Requirements" text="Attend an interest meeting, complete the member form, stay in good standing, and participate in at least two service touchpoints each semester." />
-          <InfoCard title="Dues" text="$35 per semester placeholder. This can be replaced later with actual dues policy, payment method, and scholarship information." />
+          <InfoCard title="Requirements" text="Attend an interest meeting, complete the member form, stay in good standing, and participate in at least two service touchpoints each semester." delay="0" />
+          <InfoCard title="Dues" text="$35 per semester placeholder. This can be replaced later with actual dues policy, payment method, and scholarship information." delay="1" />
         </div>
       </Section>
 
@@ -560,10 +569,10 @@ function JoinPage() {
             'Attend a welcome event or service day to meet members and ask questions.',
             'Pick a subcommittee and start showing up where your interests fit best.',
           ].map((step, index) => (
-            <article className="step-card" key={step}>
+            <Reveal as="article" className="step-card" key={step} delay={String(index % 2)}>
               <span>{String(index + 1).padStart(2, '0')}</span>
               <p>{step}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -577,11 +586,11 @@ function JoinPage() {
 
       <Section title="FAQ">
         <div className="faq-grid">
-          {faqs.map((faq) => (
-            <article className="faq-card" key={faq.question}>
+          {faqs.map((faq, index) => (
+            <Reveal as="article" className="faq-card" key={faq.question} delay={String(index % 2)}>
               <h3>{faq.question}</h3>
               <p>{faq.answer}</p>
-            </article>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -593,24 +602,28 @@ function JoinPage() {
             text="Placeholder link for the new member interest form."
             href="#"
             cta="Open form"
+            delay="0"
           />
           <ActionCard
             title="Collaborations form"
             text="Placeholder link for campus and nonprofit collaboration requests."
             href="#"
             cta="Collaborate"
+            delay="1"
           />
           <ActionCard
             title="Join the GroupMe"
             text="Get quick reminders, event updates, and club communication in the main member chat."
             href={club.groupMeLink}
             cta="Open GroupMe"
+            delay="0"
           />
           <ActionCard
             title="Donations"
             text="Support transportation, supplies, and club-led service initiatives."
             href={club.donationLink}
             cta="Support the club"
+            delay="1"
           />
         </div>
       </Section>
@@ -629,7 +642,7 @@ function ContactPage() {
 
       <Section title="Get in touch">
         <div className="contact-grid">
-          <div className="contact-card">
+          <Reveal className="contact-card" delay="0">
             <h3>Email</h3>
             <p>
               <a href={`mailto:${club.email}`}>{club.email}</a>
@@ -660,8 +673,8 @@ function ContactPage() {
             </p>
             <h3>Meeting info</h3>
             <p>General meetings every other Tuesday at 7:00 PM in the Student Activity Center.</p>
-          </div>
-          <form className="contact-form">
+          </Reveal>
+          <Reveal as="form" className="contact-form" delay="1">
             <label>
               Name
               <input type="text" name="name" placeholder="Your name" />
@@ -677,7 +690,7 @@ function ContactPage() {
             <button type="submit" className="button primary">
               Send Message
             </button>
-          </form>
+          </Reveal>
         </div>
       </Section>
     </>
@@ -695,32 +708,32 @@ function SupportPage() {
 
       <Section title="Ways to support us">
         <div className="three-up-grid">
-          {supportOptions.map((option) => (
-            <InfoCard key={option.title} title={option.title} text={option.text} />
+          {supportOptions.map((option, index) => (
+            <InfoCard key={option.title} title={option.title} text={option.text} delay={String(index % 3)} />
           ))}
         </div>
       </Section>
 
       <Section title="Donation options">
         <div className="split-grid">
-          <InfoCard title="One-time giving" text="Ideal for alumni, parents, and community supporters who want to underwrite an immediate service need." />
-          <InfoCard title="Recurring support" text="Monthly giving helps the club plan stable transportation, supplies, and emergency relief efforts across the year." />
+          <InfoCard title="One-time giving" text="Ideal for alumni, parents, and community supporters who want to underwrite an immediate service need." delay="0" />
+          <InfoCard title="Recurring support" text="Monthly giving helps the club plan stable transportation, supplies, and emergency relief efforts across the year." delay="1" />
         </div>
       </Section>
 
       <Section title="Partnership opportunities">
         <div className="three-up-grid">
-          <InfoCard title="Corporate sponsorships" text="Sponsor a service day, care-package build, or member leadership retreat." />
-          <InfoCard title="Nonprofit collaborations" text="Share volunteer needs and project goals so the club can mobilize students effectively." />
-          <InfoCard title="In-kind donations" text="Contribute supplies, food, transportation help, venue support, or print materials." />
+          <InfoCard title="Corporate sponsorships" text="Sponsor a service day, care-package build, or member leadership retreat." delay="0" />
+          <InfoCard title="Nonprofit collaborations" text="Share volunteer needs and project goals so the club can mobilize students effectively." delay="1" />
+          <InfoCard title="In-kind donations" text="Contribute supplies, food, transportation help, venue support, or print materials." delay="2" />
         </div>
       </Section>
 
       <Section title="Volunteer support information">
         <div className="link-card-grid">
-          <ActionCard title="Donate now" text="Placeholder external donation button for a future giving platform." href="#" cta="Make a gift" />
-          <ActionCard title="Partner with us" text="Placeholder partnership inquiry form for organizations and campus collaborators." href="#" cta="Start a partnership" />
-          <ActionCard title="Ask a question" text="Contact leadership about sponsorships, tax documentation, or project planning." href={`mailto:${club.email}`} cta="Email us" />
+          <ActionCard title="Donate now" text="Placeholder external donation button for a future giving platform." href="#" cta="Make a gift" delay="0" />
+          <ActionCard title="Partner with us" text="Placeholder partnership inquiry form for organizations and campus collaborators." href="#" cta="Start a partnership" delay="1" />
+          <ActionCard title="Ask a question" text="Contact leadership about sponsorships, tax documentation, or project planning." href={`mailto:${club.email}`} cta="Email us" delay="0" />
         </div>
       </Section>
     </>
@@ -729,37 +742,37 @@ function SupportPage() {
 
 function Section({ eyebrow, title, intro, children }) {
   return (
-    <section className="section container reveal">
+    <Reveal as="section" className="section container">
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       {title ? <h2>{title}</h2> : null}
       {intro ? <p className="section-intro">{intro}</p> : null}
       {children}
-    </section>
+    </Reveal>
   )
 }
 
 function PageIntro({ eyebrow, title, text }) {
   return (
-    <section className="page-intro container reveal">
+    <Reveal as="section" className="page-intro container">
       <p className="eyebrow">{eyebrow}</p>
       <h1 className="page-title">{title}</h1>
       <p className="section-intro">{text}</p>
-    </section>
+    </Reveal>
   )
 }
 
-function InfoCard({ title, text }) {
+function InfoCard({ title, text, delay = '0' }) {
   return (
-    <article className="info-card">
+    <Reveal as="article" className="info-card" delay={delay}>
       <h3>{title}</h3>
       <p>{text}</p>
-    </article>
+    </Reveal>
   )
 }
 
-function EventCard({ event }) {
+function EventCard({ event, delay = '0' }) {
   return (
-    <article className="event-card">
+    <Reveal as="article" className="event-card" delay={delay}>
       <p className="event-date">{event.date}</p>
       <h3>{event.title}</h3>
       <p>{event.summary}</p>
@@ -770,13 +783,13 @@ function EventCard({ event }) {
       <a href={event.link} target={event.link.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
         {event.linkLabel ?? 'View event'}
       </a>
-    </article>
+    </Reveal>
   )
 }
 
-function EventListItem({ event }) {
+function EventListItem({ event, delay = '0' }) {
   return (
-    <article className="event-list-item">
+    <Reveal as="article" className="event-list-item" delay={delay}>
       <div>
         <p className="event-date">{event.date}</p>
         <h3>{event.title}</h3>
@@ -789,7 +802,7 @@ function EventListItem({ event }) {
           {event.linkLabel ?? 'View event'}
         </a>
       </div>
-    </article>
+    </Reveal>
   )
 }
 
@@ -808,7 +821,7 @@ function EventsStatusNotice({ calendarState, compact = false }) {
 
 function LeaderCard({ person }) {
   return (
-    <article className="carousel-card leader-card">
+    <article className="carousel-card leader-card scroll-reveal is-visible">
       <img src={person.image} alt={person.name} />
       <div className="carousel-copy">
         <h3>{person.name}</h3>
@@ -820,7 +833,7 @@ function LeaderCard({ person }) {
 
 function SubcommitteeCard({ committee }) {
   return (
-    <article className="carousel-card subcommittee-card">
+    <article className="carousel-card subcommittee-card scroll-reveal is-visible">
       <img src={committee.image} alt={committee.name} />
       <div className="carousel-copy">
         <h3>{committee.name}</h3>
@@ -830,13 +843,69 @@ function SubcommitteeCard({ committee }) {
   )
 }
 
-function ActionCard({ title, text, href, cta }) {
+function ActionCard({ title, text, href, cta, delay = '0' }) {
   return (
-    <article className="action-card">
+    <Reveal as="article" className="action-card" delay={delay}>
       <h3>{title}</h3>
       <p>{text}</p>
       <a href={href}>{cta}</a>
-    </article>
+    </Reveal>
+  )
+}
+
+function Reveal({
+  as: Component = 'div',
+  className = '',
+  delay = '0',
+  children,
+  ...props
+}) {
+  const elementRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const element = elementRef.current
+
+    if (!element) {
+      return undefined
+    }
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsVisible(true)
+      return undefined
+    }
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    )
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [])
+
+  const revealClassName = [
+    className,
+    'scroll-reveal',
+    `reveal-delay-${delay}`,
+    isVisible ? 'is-visible' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  return (
+    <Component ref={elementRef} className={revealClassName} {...props}>
+      {children}
+    </Component>
   )
 }
 
